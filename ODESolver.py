@@ -42,12 +42,18 @@ class ODESolver:
         
         t = t0
         y = y0
+        k1 = 0.0
+        k2 = 0.0
         result = [(t,y)]
         
         for i in range(n):
             t += h
+            k1 = f(t, y)
+            
             y_tmp = y + h * f(t, y)
-            y += 0.5 * h * (f(t, y) + f(t + h, y_tmp))
+            k2 = f(t + h, y_tmp)
+            
+            y += 0.5 * h * (k1 + k2)
             result.append((t, y))
             
         return result            	
