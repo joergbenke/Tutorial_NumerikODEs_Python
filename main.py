@@ -9,8 +9,9 @@ if __name__ == "__main__":
     n = 10
     
     obj = odes.ODESolver()
-    result = obj.euler_explicit(t0, y0, h, n, lambda t, y:-math.sin(t))
+    result = obj.heun(t0, y0, h, n, lambda t, y:-math.sin(t))
     print(result)	
+    
     
     # print the graphic
     t = []
@@ -26,5 +27,6 @@ if __name__ == "__main__":
     plt.plot(t, z)
     plt.show()
         
+         
          
     
