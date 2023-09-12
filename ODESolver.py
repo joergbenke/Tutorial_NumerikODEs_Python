@@ -1,18 +1,19 @@
+import numpy as np
+
 class ODESolver:
     def euler_explicit(self, t0, y0, h, n, f):
         """
         Implementation of the explicit euler algorithm
         """
-
-        t, y = t0, y0
-        result = [(t, y)]
-
-        for i in range(n):
-            t += h
-            y += h * f(t, y)
-            result.append((t, y))
-
-        return result
+        t = np.zeros(n + 1, dtype='f')
+        y = np.zeros(n + 1, dtype='f')
+        t[0], y[0] = t0, y0
+        
+        for k in range(n):
+            t[k + 1] = t[k] + h
+            y[k + 1] = y[k] + h * f(t, y[k])
+        print(y)
+        return t, y
 
     def midpointrule(self, t0, y0, h, n, f):
         """
