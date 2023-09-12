@@ -7,7 +7,7 @@ if __name__ == "__main__":
     t0 = 0.0
     y0 = 1
     h = 0.1
-    n = 4
+    n = 400
     dim = 2
 
     obj = odes.ODESolver()
@@ -15,9 +15,9 @@ if __name__ == "__main__":
     # Defining the ODE which should be integrated
     # def fct(t, y): -math.sin(t)  #constant ODE
 
-    k = -1
-    def fct(t, y): 
-        return k * y  # exponential growth
+    # k = -1
+    # def fct(t, y): 
+    #    return k * y  # exponential growth
 
     # k, G = 1, 2
     # def fct(t, y): return k * y * (G - y)
@@ -25,7 +25,11 @@ if __name__ == "__main__":
     # g = -9.8
     # v = 0.0
     # def fct(t, y): return np.array([y[1], -g])  
+    
+    def fct(t, y):
+        return np.array([y[1], -y[0]])
 
+    y0 = np.array([0,1])
     time_array, result_euler_explicit = obj.euler_explicit(t0, y0, h, n, fct)
     #result_midpointrule = obj.midpointrule(t0, y0, h, n, fct)
     #result_heun = obj.heun(t0, y0, h, n, fct)
@@ -41,7 +45,7 @@ if __name__ == "__main__":
     plt.plot(time_array, result_euler_explicit, label="Euler explicit method")
     # plt.plot(t, y_midpointrule, label="Midpoint rule")
     # plt.plot(t, y_rk4, label="Classic RK4")
-    plt.plot(time_array, y_exact, label="Exact solution (exp)")
+    # plt.plot(time_array, y_exact, label="Exact solution (exp)")
 
     # plt.plot(t, y_exact, label="Exact solution y'=-y")
     plt.legend()

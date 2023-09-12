@@ -6,12 +6,19 @@ class ODESolver:
         Implementation of the explicit euler algorithm
         """
         t = np.zeros(n + 1, dtype='f')
-        y = np.zeros(n + 1, dtype='f')
-        t[0], y[0] = t0, y0
+        
+        if isinstance(y0, (int, float)):
+            y = np.zeros(n + 1, dtype='f')
+        else:
+            neq = len(y0)
+            y = np.zeros((n + 1, neq), dtype='f')
+                
+        t[0] = t0
+        y[0,:] = y0
         
         for k in range(n):
             t[k + 1] = t[k] + h
-            y[k + 1] = y[k] + h * f(t, y[k])
+            y[k + 1, :] = y[k, :] + h * f(t[k], y[k, :])
         print(y)
         return t, y
 
