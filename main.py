@@ -1,7 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import ODESolver as odes
+#from Visualization import visualization_fct
 import math
+
+def visualization_fct(time_array, result_array, label): 
+    """ Printing the solutions """
+    plt.plot(time_array, result_array, label=label)
+    plt.plot(time_array, result_array, label=label)
+    plt.plot(time_array, result_array, label=label)
+    plt.plot(time_array, result_array, label=label)
+    
+    plt.legend()
+    plt.show()
 
 if __name__ == "__main__":
 
@@ -29,14 +40,15 @@ if __name__ == "__main__":
     # def fct(t, y): 
     #    return k * y * (G - y)
 
-    g = -9.8
-    label = "falling body"
-    def fct(t, y): 
-        return np.array([y[1], g])  
+    # g = -9.8
+    # label = "falling body"
+    # def fct(t, y): 
+    #    return np.array([y[1], g])  
     
     # ODE y'' + y = 0
-    # def fct(t, y):
-    #    return np.array([y[1], -y[0]])
+    label = "y'' + y = 0"
+    def fct(t, y):
+        return np.array([y[1], -y[0]])
 
     #
     # Integrating the ODEs 
@@ -47,26 +59,19 @@ if __name__ == "__main__":
 
     #
     # Printing the solutions
-    if label == "exponential growth":
-        plt.plot(time_array, result_euler_explicit, label="expl Euler")
-        plt.plot(time_array, result_midpointrule, label="Midpointrule")
-        plt.plot(time_array, result_heun, label="Heun")
-        plt.plot(time_array, result_rk4, label="RK4")
-        # plt.plot(time_array, y_exact, label="Exact solution (exp)")
-        
-    if label == "falling body":
-        plt.plot(time_array, result_euler_explicit, label=["height (expl Euler)", "velocity (expl Euler"])
-        plt.plot(time_array, result_midpointrule, label=["height (Midpointrule)", "velocity (Midpointrule)"])
-        plt.plot(time_array, result_heun, label=["height (Heun)", "velocity (Heun)"])
-        plt.plot(time_array, result_rk4, label=["height (RK4)", "velocity (RK4)"])
-        # plt.plot(time_array, y_exact, label="Exact solution (exp)")         
-        # plt.plot(t, y_exact, label="Exact solution y'=-y")
+    visualization_fct( time_array, result_euler_explicit, label='expl Euler') 
+    # !!!!evtl mit kwargs versuchen !!!!!!!
+    # vis.visualization_fct( time_array, result_midpointrule, label="Midpointrule")
+    # vis.visualization_fct( time_array, result_heun, label="Heun")
+    # vis.visualization_fct( time_array, result_rk4, label="RK4")
+    
 
+  
     # print the figure
     # y_exact = np.zeros(n + 1, dtype = 'f')
     # for i in range(n + 1):
         # y_exact[i] = math.exp(-i * h)  #exact solution for y'=-y
         # y_exact.append(G * (1 / (1 + math.exp(-k * G * i * h) * (G / y0 - 1))))  # exact solution for y'=k*y*)G-y))
 
-    plt.legend()
-    plt.show()
+   
+
