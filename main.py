@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import ODESolver as odes
 import math
 
+
 if __name__ == "__main__":
     t0, y0 = 0, 1
     h = 0.1
