@@ -4,6 +4,10 @@ import math
 
 
 if __name__ == "__main__":
+    """
+    Test of different ODE solver
+    """
+    
     t0, y0 = 0, 1
     h = 0.1
     n = 40
